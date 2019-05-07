@@ -198,7 +198,30 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
             String logMsg = "renaming " + this.tempFile + " to " + file;
             LOG.d(LOG_TAG, logMsg);
             File f = new File(this.tempFile);
-            if (!f.renameTo(new File(file))) LOG.e(LOG_TAG, "FAILED " + logMsg);
+            try{
+                InputStream in = new FileInputStream(f);
+                try {
+                    OutputStream out = new FileOutputStream(new File(file));
+                    try {
+                        this.copy(in,out,false);
+                    }
+                    catch(Exception e) {
+                        e.printStackTrace();
+                    }
+                    finally {
+                        out.close();
+                    }
+                }
+                catch(Exception e) {
+                    e.printStackTrace();
+                }
+                finally {
+                    in.close();
+                }
+            }
+            catch(IOException e) {
+                e.printStackTrace();
+            }
         }
         // more than one file so the user must have pause recording. We'll need to concat files.
         else {

@@ -28,6 +28,9 @@ description: Record and play audio on the device.
 # cordova-plugin-media
 
 
+__Modified__
+Find original at: https://github.com/apache/cordova-plugin-media
+
 This plugin provides the ability to record and play back audio files on a device.
 
 __NOTE__: The current implementation does not adhere to a W3C
